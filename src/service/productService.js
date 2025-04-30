@@ -2,6 +2,9 @@ import Products from "../modals/productModal.js";
 import Subcatogery from "../modals/subCatogeryModal.js";
 import Varient from "../modals/varientModal.js";
 
+
+
+//aadProductService
 export const aadProductService = async (
   title,
   description,
@@ -57,6 +60,7 @@ export const aadProductService = async (
   };
 };
 
+//getProductService
 export const getProductService = async (search) => {
   const quary = search
     ? {
@@ -74,6 +78,7 @@ export const getProductService = async (search) => {
   return products;
 };
 
+//getProductByIdService
 export const getProductByIdService = async (id) => {
   if (!id) {
     throw new Error("invalid product");

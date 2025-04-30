@@ -15,8 +15,7 @@ export const registerService = async (email, password, name) => {
     email,
     password: hashPass,
   });
-
-  return newUser;
+ return newUser;
 };
 
 export const loginService = async (email, password) => {

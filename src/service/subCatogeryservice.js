@@ -1,6 +1,9 @@
 import Catogery from "../modals/catogeryModal.js";
 import Subcatogery from "../modals/subCatogeryModal.js";
 
+
+
+//addSubcatogeryService
 export const addSubcatogeryService = async (name, catogery) => {
   if (!name || !catogery) {
     throw new Error("all filds are required");
@@ -24,8 +27,7 @@ export const addSubcatogeryService = async (name, catogery) => {
   return newSubCat;
 };
 
-
-
+//getsubCatogeryy
 export const getSubcatByCatService = async (categoryId) => {
   if (!categoryId) {
     throw new Error("category id is required")

@@ -3,11 +3,9 @@ import { loginService, registerService } from "../service/authService.js";
 export const register = async (req, res) => {
   const { email, name, password } = req.body;
   console.log(email, name, password);
-
   if (!email || !name || !password) {
     throw new Error("all fields are requird");
   }
-
   const data = await registerService(email, password, name);
   if (data) {
     res.status(201).json({ message: "register successfull", user: data });

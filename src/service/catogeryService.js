@@ -1,8 +1,8 @@
 import Catogery from "../modals/catogeryModal.js";
 
 export const addCatogeryService = async (name) => {
-    console.log(name);
-    
+  console.log(name);
+
   if (!name) {
     throw new Error("field are requird");
   }
@@ -20,6 +20,6 @@ export const addCatogeryService = async (name) => {
 };
 
 export const getAllCatogeryService = async () => {
-    const catogeries = await Catogery.find();
-    return catogeries;
-  };
+  const catogeries = await Catogery.find();
+  return catogeries;
+};
