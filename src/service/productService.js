@@ -2,8 +2,6 @@ import Products from "../modals/productModal.js";
 import Subcatogery from "../modals/subCatogeryModal.js";
 import Varient from "../modals/varientModal.js";
 
-
-
 //aadProductService
 export const aadProductService = async (
   title,
@@ -38,10 +36,10 @@ export const aadProductService = async (
     parsedVarients =
       typeof varients === "string" ? JSON.parse(varients) : varients;
   } catch (err) {
-    throw new Error("Invalid varients format — must be valid JSON.");
+    throw new Error("invalid varient format");
   }
   if (!Array.isArray(parsedVarients)) {
-    throw new Error("Varients must be an array.");
+    throw new Error("varients is must array");
   }
 
   const createdVarients = await Varient.insertMany(
@@ -51,7 +49,7 @@ export const aadProductService = async (
     }))
   );
 
-  newProduct.varient.push(...createdVarients.map(item=> item._id));
+  newProduct.varient.push(...createdVarients.map((item) => item._id));
   await newProduct.save();
 
   return {
@@ -71,7 +69,7 @@ export const getProductService = async (search) => {
         isDelete: false,
       };
 
-  const products = await Products.find(quary).populate({path:"varient"})
+  const products = await Products.find(quary).populate({ path: "varient" });
   if (!products) {
     throw new Error("no product exits");
   }
@@ -83,10 +81,51 @@ export const getProductByIdService = async (id) => {
   if (!id) {
     throw new Error("invalid product");
   }
- const product = await Products.findOne({ _id:id, isDelete: false }).populate(
+  const product = await Products.findOne({ _id: id, isDelete: false }).populate(
     { path: "subCatogery" }
   );
-  const varients = await Varient.find({ product:id });
+  const varients = await Varient.find({ product: id });
 
   return { product, varients };
+};
+
+//updateproductsrvice
+export const updateProductService = async (
+  productId,
+  title,
+  description,
+  subCatogery,
+  image,
+  varients
+) => {
+  const product = await Products.findById(productId);
+  if (!product) {
+    throw new Error("product not found");
+  }
+  console.log(productId, title, description, subCatogery, image, varients);
+  const subCat = await Subcatogery.findOne({ name: subCatogery });
+  product.title = title || product.title;
+  product.description = description || product.description;
+  product.subCatogery = subCat._id || product.subCatogery;
+  product.image = image.length ? image : product.image;
+
+  await product.save();
+  //varientUpdate
+  if (Array.isArray(varients) && varients.length > 0) {
+    for (const variantData of varients) {
+      if (variantData._id) {
+        await Varient.findByIdAndUpdate(variantData._id, variantData, {
+          new: true,
+        });
+      } else {
+        const newVariant = new Varient({
+          ...variantData,
+          product: productId,
+        });
+        await newVariant.save();
+      }
+    }
+  }
+
+  return product;
 };

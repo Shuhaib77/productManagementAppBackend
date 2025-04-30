@@ -26,12 +26,16 @@ export const deleteWishList = async (req, res) => {
   if (data) {
     res
       .status(200)
-      .json({ message: "Product removed from wishlist", wishlist: data });
+      .json({ message: "product removed from wishlist", wishlist: data });
   }
 };
 
 export const getWishList = async (req, res, next) => {
   const userId = req.user._id;
-  const wishlist = await getWishListService(userId);
-  res.status(200).json({ wishlist });
+  const data = await getWishListService(userId);
+  if (data) {
+    res
+      .status(200)
+      .json({ message: "product removed from wishlist", wishlist: data });
+  }
 };

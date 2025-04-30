@@ -2,24 +2,16 @@ import {
   aadProductService,
   getProductByIdService,
   getProductService,
+  updateProductService,
 } from "../service/productService.js";
 
 export const addProduct = async (req, res) => {
   const { title, description, subCatogery, varients } = req.body;
-  console.log(title,
-    description,
-    subCatogery,
-    varients,
+  console.log(title, description, subCatogery, varients, "llopp");
 
-   
-"llopp");
-  
-  
-//   const image = req.cloudinaryImageUrl;
-  const image =req.cloudinaryImageUrls
+  const image = req.cloudinaryImageUrls;
 
-  console.log(image,"imagee");
-  
+  console.log(image, "imagee");
 
   const { newProduct, createdVarients } = await aadProductService(
     title,
@@ -59,5 +51,26 @@ export const getProductById = async (req, res) => {
     message: "Product found",
     product,
     varients,
+  });
+};
+
+export const updateProduct = async (req, res) => {
+  const { productId } = req.params;
+  const { title, description, subCatogery, varients } = req.body;
+
+  const image = req.cloudinaryImageUrls;
+
+  const updatedProduct = await updateProductService(
+    productId,
+    title,
+    description,
+    subCatogery,
+    image,
+    varients
+  );
+
+  res.status(200).json({
+    message: "Product updated successfully",
+    product: updatedProduct,
   });
 };

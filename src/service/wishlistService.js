@@ -1,5 +1,6 @@
 import Wishlist from "../modals/wishlistModal.js";
 
+//addwishlist
 export const addWishListService = async (productId, userId) => {
   let wishlist = await Wishlist.findOne({ user: userId });
 
@@ -16,6 +17,7 @@ export const addWishListService = async (productId, userId) => {
   return await wishlist.save();
 };
 
+//deletewishlist
 export const deleteWishListService = async (productId, userId) => {
   if (!productId) {
     throw new Error("invalid id");
@@ -30,13 +32,14 @@ export const deleteWishListService = async (productId, userId) => {
   return await wishlist.save();
 };
 
+//getwishlist
 export const getWishListService = async (userId) => {
   const wishlist = await Wishlist.findOne({ user: userId }).populate(
     "products"
   );
 
   if (!wishlist) {
-    throw new Error("Wishlist not found");
+    throw new Error("wishlist not found");
   }
 
   return wishlist || [];

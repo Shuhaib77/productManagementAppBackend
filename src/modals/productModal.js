@@ -18,7 +18,7 @@ const prodctSchema = mongoose.Schema(
     image: [
       {
         type: String,
-        required: true,
+       
       },
     ],
     isDelete: {
