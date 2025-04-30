@@ -6,6 +6,7 @@ import { globelErrors } from "./middlewares/globelErrors.js";
 import catogeryRoute from "./router/catogeryRoute.js";
 import subCatogeryRoute from "./router/subCatogeryRoute.js";
 import productRoute from "./router/productRoute.js";
+import wishlistRoute from "./router/wishlistRoute.js";
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use("/api", authRoute);
 app.use("/api", catogeryRoute);
 app.use("/api", subCatogeryRoute);
 app.use("/api", productRoute);
+app.use("/api", wishlistRoute);
 
 Db();
 

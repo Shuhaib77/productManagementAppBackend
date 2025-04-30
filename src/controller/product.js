@@ -6,9 +6,20 @@ import {
 
 export const addProduct = async (req, res) => {
   const { title, description, subCatogery, varients } = req.body;
+  console.log(title,
+    description,
+    subCatogery,
+    varients,
+
+   
+"llopp");
+  
   
 //   const image = req.cloudinaryImageUrl;
   const image =req.cloudinaryImageUrls
+
+  console.log(image,"imagee");
+  
 
   const { newProduct, createdVarients } = await aadProductService(
     title,
