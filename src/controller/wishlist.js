@@ -21,6 +21,8 @@ export const addWishList = async (req, res) => {
 export const deleteWishList = async (req, res) => {
   const { productId } = req.params;
   const userId = req.user._id;
+  console.log(productId,"ll");
+  
 
   const data = await deleteWishListService(productId, userId);
   if (data) {
@@ -36,6 +38,6 @@ export const getWishList = async (req, res, next) => {
   if (data) {
     res
       .status(200)
-      .json({ message: "product removed from wishlist", wishlist: data });
+      .json({ message: "productaddeddt", wishlist: data });
   }
 };

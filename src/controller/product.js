@@ -30,14 +30,14 @@ export const addProduct = async (req, res) => {
 };
 
 export const getProducts = async (req, res) => {
-  const { search } = req.query;
-
-  const data = await getProductService(search);
-  if (data) {
-    res.status(200).json({ message: "product finded", products: data });
-  }
-};
-
+    const { search, subCatIds } = req.query;
+  
+    const subCatArray = subCatIds ? subCatIds.split(",") : [];
+  
+    const data = await getProductService(search, subCatArray);
+    res.status(200).json({ message: "Products fetched", products: data });
+  };
+  
 export const getProductById = async (req, res) => {
   const id = req.params.id.trim();
 

@@ -59,22 +59,30 @@ export const aadProductService = async (
 };
 
 //getProductService
-export const getProductService = async (search) => {
-  const quary = search
-    ? {
-        isDelete: false,
-        $or: [{ title: { $regex: search, $options: "i" } }],
-      }
-    : {
-        isDelete: false,
-      };
 
-  const products = await Products.find(quary).populate({ path: "varient" });
-  if (!products) {
-    throw new Error("no product exits");
-  }
-  return products;
-};
+
+export const getProductService = async (search = "", subCatIds = []) => {
+    const query = {
+      isDelete: false,
+    };
+  
+    if (search) {
+      query.title = { $regex: search, $options: "i" };
+    }
+  
+    if (subCatIds.length > 0) {
+      query.subCatogery = { $in: subCatIds };
+    }
+  
+    const products = await Products.find(query).populate("varient");
+  
+    if (!products || products.length === 0) {
+      throw new Error("No products found");
+    }
+  
+    return products;
+  };
+  
 
 //getProductByIdService
 export const getProductByIdService = async (id) => {
