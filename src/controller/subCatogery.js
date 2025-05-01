@@ -1,6 +1,8 @@
 import { addSubcatogeryService } from "../service/subCatogeryservice.js";
 import { getSubcatByCatService } from "../service/subCatogeryservice.js";
 
+
+//addSubCatogery
 export const addSubCatogery = async (req, res) => {
   const { name, catogery } = req.body;
   const data = await addSubcatogeryService(name, catogery);
@@ -9,6 +11,8 @@ export const addSubCatogery = async (req, res) => {
   }
 };
 
+
+//getSubcategoryByCategory
 export const getSubcategoryByCategory = async (req, res) => {
   const { categoryId } = req.params;
 

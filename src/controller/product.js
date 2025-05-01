@@ -5,6 +5,7 @@ import {
   updateProductService,
 } from "../service/productService.js";
 
+//addProduct
 export const addProduct = async (req, res) => {
   const { title, description, subCatogery, varients } = req.body;
   console.log(title, description, subCatogery, varients, "llopp");
@@ -28,16 +29,17 @@ export const addProduct = async (req, res) => {
     });
   }
 };
-
+//getProducts
 export const getProducts = async (req, res) => {
-    const { search, subCatIds } = req.query;
-  
-    const subCatArray = subCatIds ? subCatIds.split(",") : [];
-  
-    const data = await getProductService(search, subCatArray);
-    res.status(200).json({ message: "Products fetched", products: data });
-  };
-  
+  const { search, subCatIds } = req.query;
+
+  const subCatArray = subCatIds ? subCatIds.split(",") : [];
+
+  const data = await getProductService(search, subCatArray);
+  res.status(200).json({ message: "Products fetched", products: data });
+};
+
+//getProductById
 export const getProductById = async (req, res) => {
   const id = req.params.id.trim();
 
@@ -53,7 +55,7 @@ export const getProductById = async (req, res) => {
     varients,
   });
 };
-
+//up product
 export const updateProduct = async (req, res) => {
   const { productId } = req.params;
   const { title, description, subCatogery, varients } = req.body;

@@ -4,6 +4,7 @@ import {
   getWishListService,
 } from "../service/wishlistService.js";
 
+//addWishList
 export const addWishList = async (req, res) => {
   const { productId } = req.params;
   const userId = req.user._id;
@@ -18,11 +19,11 @@ export const addWishList = async (req, res) => {
   }
 };
 
+//deleteWishList
 export const deleteWishList = async (req, res) => {
   const { productId } = req.params;
   const userId = req.user._id;
-  console.log(productId,"ll");
-  
+  console.log(productId, "ll");
 
   const data = await deleteWishListService(productId, userId);
   if (data) {
@@ -32,12 +33,11 @@ export const deleteWishList = async (req, res) => {
   }
 };
 
+//getWishList
 export const getWishList = async (req, res, next) => {
   const userId = req.user._id;
   const data = await getWishListService(userId);
   if (data) {
-    res
-      .status(200)
-      .json({ message: "productaddeddt", wishlist: data });
+    res.status(200).json({ message: "productaddeddt", wishlist: data });
   }
 };

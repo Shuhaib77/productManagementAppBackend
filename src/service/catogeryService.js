@@ -1,5 +1,6 @@
 import Catogery from "../modals/catogeryModal.js";
 
+//addCatogeryService
 export const addCatogeryService = async (name) => {
   console.log(name);
 
@@ -19,6 +20,7 @@ export const addCatogeryService = async (name) => {
   return newCatogery;
 };
 
+//getAllCatogeryService
 export const getAllCatogeryService = async () => {
   const catogeries = await Catogery.find();
   return catogeries;

@@ -1,5 +1,6 @@
 import { loginService, registerService } from "../service/authService.js";
 
+//register
 export const register = async (req, res) => {
   const { email, name, password } = req.body;
   console.log(email, name, password);
@@ -12,6 +13,7 @@ export const register = async (req, res) => {
   }
 };
 
+//login
 export const login = async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
